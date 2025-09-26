@@ -3,7 +3,7 @@ name: Update images.json
 on:
   push:
     paths:
-      - 'اپلود/**'   # وقتی هر چیزی تو پوشه اپلود تغییر کرد یا اضافه شد
+      - 'uploads/**'   # وقتی هر چیزی تو پوشه uploads تغییر کرد یا اضافه شد
 
 jobs:
   update-json:
@@ -15,8 +15,8 @@ jobs:
       - name: Generate images.json
         run: |
           echo '{"images":[' > images.json
-          for f in $(ls اپلود); do
-            echo "\"اپلود/$f\"," >> images.json
+          for f in $(ls uploads); do
+            echo "\"uploads/$f\"," >> images.json
           done
           # حذف کامای اضافی آخر
           sed -i '$ s/,$//' images.json
@@ -29,4 +29,3 @@ jobs:
           git add images.json
           git commit -m "Auto update images.json"
           git push
-
