@@ -3,7 +3,7 @@ name: Update images.json
 on:
   push:
     paths:
-      - 'uploads/**'   # وقتی هر چیزی تو پوشه uploads تغییر کرد یا اضافه شد
+      - 'uploads/**'
 
 jobs:
   update-json:
@@ -16,9 +16,8 @@ jobs:
         run: |
           echo '{"images":[' > images.json
           for f in $(ls uploads); do
-            echo "\"uploads/$f\"," >> images.json
+            echo "\"$f\"," >> images.json
           done
-          # حذف کامای اضافی آخر
           sed -i '$ s/,$//' images.json
           echo "]}" >> images.json
 
